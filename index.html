@@ -357,11 +357,15 @@
               headingSelector: "h1, h2, h3",
               hasInnerContainers: true,
             });
+            this.load = true;
+          });
+        },
+        watch: {
+          // https://qiita.com/miyauchoi/items/73fa77f65b88214d9dba
+          bloghtml: () => {
             // Initial processing of highlight.js
             hljs.initHighlightingOnLoad();
-          });
-
-          this.load = true;
+          },
         },
         methods: {
           _updateDimensions() {
@@ -396,11 +400,3 @@
     </script>
   </body>
 </html>
-<!--
-xs	Extra small		< 600px
-sm	Small	600px	600px >< 960px
-md	Medium	960px	960px >< 1,264px*
-lg	Large	1,264px	1,264px* >< 1,904px*
-xl	Extra large	1,904px	> 1,904px*
-*Actual display area is -16px (scrollbar width)
--->
