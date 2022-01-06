@@ -145,7 +145,7 @@
               <v-container>
                 <v-row>
                   <v-col
-                    v-for="({ src, img, title, text}, i) in articles"
+                    v-for="({ src, img, title, text, date}, i) in articles"
                     :key="i"
                     cols="12"
                     xs="12"
@@ -167,6 +167,7 @@
                       ></v-img>
                       <v-card-title> {{title||src}} </v-card-title>
                       <v-card-text> {{text}} </v-card-text>
+                      <span style="margin: 16px"> {{date}}</span>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -209,42 +210,50 @@
                       class="pa-4 mb-2"
                       :style="'width:' + side_width + ';'"
                     >
-                      <span class="title"> topic</span>
+                      <span class="title"> Topics</span>
                       <div class="py-1"></div>
                       <v-chip v-for="(item in blogprop.topics" class="ma-1">
                         {{item}}
                       </v-chip>
                     </v-card>
-                    <v-card
-                      elevation="2"
-                      class="pa-4 mb-2"
-                      :style="'width:' + side_width + ';'"
+                    <div
+                      style="
+                        position: -webkit-sticky;
+                        position: sticky;
+                        top: 60px;
+                      "
                     >
-                      <span class="title"> author</span>
-                      <div class="ma-2">
-                        <v-img
-                          class="pa-2"
-                          contain
-                          width="40"
-                          :src="blogprop.author?blogprop.author.avatar?blogprop.author.avatar:image(blogprop.author.name):image(blogprop.src)"
-                        />
-                      </div>
-                      <div class="pa-1">
-                        {{blogprop.author?blogprop.author.name:""}}
-                      </div>
-                      <div class="pa-1">
-                        {{blogprop.author?blogprop.author.message:""}}
-                      </div>
-                    </v-card>
-                    <v-card
-                      v-show="clientWidth > 1280 - 16"
-                      elevation="2"
-                      class="pa-4"
-                      :style="'width:' + side_width + ';'"
-                    >
-                      <span class="title"> index</span>
-                      <div class="toc"></div>
-                    </v-card>
+                      <v-card
+                        elevation="2"
+                        class="pa-4 mb-2"
+                        :style="'width:' + side_width + ';'"
+                      >
+                        <span class="title"> Author</span>
+                        <div class="ma-2">
+                          <v-img
+                            class="pa-2"
+                            contain
+                            width="40"
+                            :src="blogprop.author?blogprop.author.avatar?blogprop.author.avatar:image(blogprop.author.name):image(blogprop.src)"
+                          />
+                        </div>
+                        <div class="pa-1">
+                          {{blogprop.author?blogprop.author.name:""}}
+                        </div>
+                        <div class="pa-1">
+                          {{blogprop.author?blogprop.author.message:""}}
+                        </div>
+                      </v-card>
+                      <v-card
+                        v-show="clientWidth > 1280 - 16"
+                        elevation="2"
+                        class="pa-4"
+                        :style="'width:' + side_width + ';'"
+                      >
+                        <span class="title"> Contents</span>
+                        <div class="toc"></div>
+                      </v-card>
+                    </div>
                   </v-col>
                 </v-row>
               </v-container>
@@ -362,9 +371,11 @@
         },
         watch: {
           // https://qiita.com/miyauchoi/items/73fa77f65b88214d9dba
-          bloghtml: () => {
-            // Initial processing of highlight.js
-            hljs.initHighlightingOnLoad();
+          bloghtml: function () {
+            this.$nextTick(function () {
+              // Initial processing of highlight.js
+              hljs.initHighlightingOnLoad();
+            });
           },
         },
         methods: {
