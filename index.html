@@ -255,8 +255,8 @@
         <v-footer dark>
           <div class="title font-weight-light grey--text">
             &copy; {{ (new Date()).getFullYear() }} KLLC ||
-            <a href="https://github.com/kllc/blog">
-              https://github.com/kllc/blog</a
+            <a href="https://github.com/kllc/markdown-blog">
+              https://github.com/kllc/markdown-blog</a
             >
             <!-- // If you want to remove the ads, remove this line. -->
             ||<span v-html="ad"></span>
@@ -264,13 +264,13 @@
         </v-footer>
       </v-app>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vbnet.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vbnet.min.js"></script>
 
     <script type="module">
       import index from "./index.js";
@@ -288,9 +288,9 @@
             bloghtml: "",
             blogprop: {
               id: 0,
-              src: "https://twemoji.maxcdn.com/v/13.0.1/72x72/1f4d8.png",
+              src: "",
               date: "",
-              img: "https://twemoji.maxcdn.com/v/13.0.1/72x72/1f4d8.png",
+              img: "",
               title: "",
               topics: [],
               author: { name: "", avatar: "", message: "" },
@@ -382,7 +382,6 @@
             return this.emojis[
               Math.floor(this.decimalHash(text) * this.emojis.length)
             ];
-            return "https://twemoji.maxcdn.com/v/13.0.1/72x72/1f4d8.png";
           },
           decimalHash(string) {
             // https://stackoverflow.com/questions/61634063/generate-deterministic-hash-number-between-0-and-1-from-string
