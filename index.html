@@ -374,9 +374,9 @@
           bloghtml: function (val) {
             this.$nextTick(function () {
               // Initial processing of highlight.js
+              // https://stackoverflow.com/questions/13094541/how-to-reinitialize-highlight-js
               hljs.initHighlighting.called = false;
               hljs.initHighlighting();
-              // hljs.initHighlightingOnLoad();
             });
           },
         },
