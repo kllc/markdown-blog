@@ -371,7 +371,7 @@
         },
         watch: {
           // https://qiita.com/miyauchoi/items/73fa77f65b88214d9dba
-          bloghtml: function () {
+          bloghtml: function (val) {
             this.$nextTick(function () {
               // Initial processing of highlight.js
               hljs.initHighlightingOnLoad();
