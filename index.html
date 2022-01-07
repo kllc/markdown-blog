@@ -273,31 +273,13 @@
         </v-footer>
       </v-app>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"
-      defer
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"
-      defer
-    ></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vbnet.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"
-      defer
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vbnet.min.js"></script>
 
     <script type="module">
       import index from "./index.js";
@@ -372,6 +354,7 @@
             });
             this.bloghtml = marked(res.data);
           }
+          hljs.initHighlightingOnLoad();
 
           this.$nextTick(() => {
             this._updateDimensions();
@@ -384,6 +367,7 @@
               headingSelector: "h1, h2, h3",
               hasInnerContainers: true,
             });
+            hljs.initHighlightingOnLoad();
             this.load = true;
           });
         },
