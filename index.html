@@ -354,7 +354,6 @@
             });
             this.bloghtml = marked(res.data);
           }
-          hljs.initHighlightingOnLoad();
 
           this.$nextTick(() => {
             this._updateDimensions();
@@ -367,7 +366,6 @@
               headingSelector: "h1, h2, h3",
               hasInnerContainers: true,
             });
-            hljs.initHighlightingOnLoad();
             this.load = true;
           });
         },
@@ -376,7 +374,9 @@
           bloghtml: function (val) {
             this.$nextTick(function () {
               // Initial processing of highlight.js
-              hljs.initHighlightingOnLoad();
+              hljs.initHighlighting.called = false;
+              hljs.initHighlighting();
+              // hljs.initHighlightingOnLoad();
             });
           },
         },
