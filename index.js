@@ -56,7 +56,8 @@ export default () => {
       src: "md/sample/sample5.md",
     },
     {
-      src: "md/sample/sample6.md",
+      src: "https://kllc.jp",
+      anchor: true,
     },
   ];
   return index;

@@ -341,6 +341,9 @@
             this.blogprop = this.articles.filter((item) => {
               if (item.src == params.get("src")) return true;
             })[0];
+            if (this.blogprop.anchor) {
+              window.location.href = params.get("src");
+            }
             const res = await axios.get(this.blogprop.src);
             document.title = this.blogprop.title || this.blogprop.src;
 
