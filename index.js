@@ -1,6 +1,12 @@
 export default () => {
   const index = [
     {
+      date: "22.05.24",
+      title: "URL Encode Blog",
+      src: "https://kllc.github.io/markdown-blog/encode",
+      anchor: true,
+    },
+    {
       src: "md/sample/sample1.md",
       date: "21.12.29",
       title: "<Sample>:Mobile first & Responsive",
