@@ -49,21 +49,7 @@ export default () => {
       },
     },
     {
-      src: "md/sample/sample4.md",
-      date: "22.1.1",
-      title: "Sample Title",
-      text: "text text text text text text text text text text text text text text text text text text text text text text text text",
-      topics: ["markdown", "vue", "vuetify", "tocbot", "highlight"],
-      author: {
-        name: "k",
-      },
-    },
-    {
       src: "md/sample/sample5.md",
-    },
-    {
-      src: "https://kllc.jp",
-      anchor: true,
     },
   ];
   return index;
