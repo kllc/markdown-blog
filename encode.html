@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <title>Encode</title>
+    <link rel="icon" href="https://kllc.github.io/repo/img/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <style>
+      body {
+        font-family: "Noto Sans JP", sans-serif;
+      }
+      a {
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-main class="grey lighten-5">
+          <v-container fluid class="pa-4">
+            Create a blog composed of URL encoding
+            <section>
+              <v-textarea
+                outlined
+                v-model="md"
+                label="Markdown"
+                class="my-4"
+              ></v-textarea>
+              <v-textarea
+                outlined
+                v-model="prop"
+                label="Property"
+                class="my-4"
+              ></v-textarea>
+              <v-textarea
+                outlined
+                v-model="blogurl"
+                label="Link"
+                class="my-4"
+              ></v-textarea>
+              <v-btn elevation="2" @click="copyurl">Copy&Open</v-btn>
+            </section>
+          </v-container>
+        </v-main>
+      </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/pieroxy/lz-string/libs/lz-string.js"></script>
+
+    <script type="module">
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        data() {
+          return {
+            md: `# F1
+## F2
+Body`,
+            prop: `"date": "22.22.22",
+"title": "memo",
+"img": "",
+"topics": [""],
+"author": {
+  "name": "name",
+  "avatar": "https://kllc.github.io/repo/img/user.png",
+  "message": "message"
+}`,
+          };
+        },
+        computed: {
+          blogurl: function () {
+            return (
+              "https://kllc.github.io/markdown-blog/?html=" +
+              LZString.compressToEncodedURIComponent(this.md) +
+              "&prop=" +
+              LZString.compressToEncodedURIComponent(this.prop)
+            );
+          },
+        },
+        async mounted() {},
+        watch: {},
+        methods: {
+          copyurl() {
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(this.blogurl).then(function () {});
+            }
+            window.open(this.blogurl);
+          },
+        },
+        destroyed() {},
+      });
+    </script>
+  </body>
+</html>

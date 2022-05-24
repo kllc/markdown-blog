@@ -300,6 +300,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vbnet.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/pieroxy/lz-string/libs/lz-string.js"></script>
 
     <script type="module">
       import index from "./index.js";
@@ -363,25 +364,46 @@
           const url = new URL(window.location.href);
           const params = url.searchParams;
 
+          // Setting up marked.js
+          marked.setOptions({
+            breaks: true,
+
+            // Highlighting with highlight.js
+            highlight: function (code, lang) {
+              return hljs.highlightAuto(code, [lang]).value;
+            },
+          });
+
+          if (params.get("prop")) {
+            this.blogprop = JSON.parse(
+              '{"src":"urlencode",' +
+                LZString.decompressFromEncodedURIComponent(params.get("prop")) +
+                "}"
+            );
+            document.title = this.blogprop.title;
+          }
+
+          if (params.get("html")) {
+            this.bloghtml = marked(
+              LZString.decompressFromEncodedURIComponent(params.get("html"))
+            );
+          }
+
           if (params.get("src")) {
-            this.blogprop = this.articles.filter((item) => {
+            const blogprop = this.articles.filter((item) => {
               if (item.src == params.get("src")) return true;
             })[0];
+            if (blogprop) {
+              this.blogprop = blogprop;
+            } else {
+              this.blogprop.src = params.get("src");
+            }
             if (this.blogprop.anchor) {
               window.location.href = params.get("src");
             }
             const res = await axios.get(this.blogprop.src);
             document.title = this.blogprop.title || this.blogprop.src;
 
-            // Setting up marked.js
-            marked.setOptions({
-              breaks: true,
-
-              // Highlighting with highlight.js
-              highlight: function (code, lang) {
-                return hljs.highlightAuto(code, [lang]).value;
-              },
-            });
             this.bloghtml = marked(res.data);
           }
 
